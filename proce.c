@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "usi.h"
 #include "shogi.h"
 
 /* unacceptable when the program is thinking, or quit pondering */
@@ -90,6 +91,9 @@ procedure( tree_t * restrict ptree )
   if ( sckt_mnj != SCKT_NULL ) { return proce_mnj( ptree ); }
 #endif
 
+  if(usi_mode) {
+    return usi_procedure(ptree);
+  }
   return proce_cui( ptree );
 }
 
@@ -103,6 +107,7 @@ int exclude_list[MAX_LEGAL_MOVES], all_moves[MAX_LEGAL_MOVES];
 
 int myTime, hisTime, movesPerSession, inc, plyNr;
 char xboard_mode;
+extern char usi_mode;
 
 int
 xboard_to_CSA( tree_t * restrict ptree, char *in, char *out, int status )
@@ -258,6 +263,12 @@ proce_cui( tree_t * restrict ptree )
   token = strtok_r( str_cmdline, str_delimiters, &last );
 
   if ( token == NULL || *token == '#' ) { return 1; }
+  if ( !strcmp(token, "usi") || !strcmp(token, "isready") ||
+       !strcmp(token, "usinewgame") || !strcmp(token, "setoption") ||
+       !strcmp(token, "position") || !strcmp(token, "go") ||
+       !strcmp(token, "stop") || !strcmp(token, "quit") ) {
+    return usi_procedure(ptree);
+  }
 #ifdef XBOARD
   { 
     if(xboard_mode) {
