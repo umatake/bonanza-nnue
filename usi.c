@@ -7,6 +7,10 @@
 char usi_mode = 0;
 static char eval_file[512] = "";
 
+const char *usi_get_eval_file(void) {
+    return eval_file;
+}
+
 void usi_set_eval_file(const char *path)
 {
     if(path) {

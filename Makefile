@@ -1,4 +1,4 @@
-OBJS =data.o main.o io.o proce.o usi.o nnue_eval_stub.o utility.o ini.o attack.o book.o makemove.o \
+OBJS =data.o main.o io.o proce.o usi.o nnue.o utility.o ini.o attack.o book.o makemove.o \
       unmake.o time.o csa.o valid.o bitop.o iterate.o searchr.o search.o \
       quiesrch.o evaluate.o swap.o  hash.o root.o next.o movgenex.o \
       genevasn.o gencap.o gennocap.o gendrop.o mate1ply.o rand.o learn1.o \
@@ -26,10 +26,10 @@ help:
 	@echo "  icc"
 
 gcc:
-	$(MAKE) CC=gcc CFLAGS='-std=gnu99 -O3 -Wall $(OPT)' LDFLAG1='-lm -lpthread' bonanza
+	$(MAKE) CC=gcc CFLAGS='-std=gnu99 -O3 -Wall -fcommon $(OPT)' LDFLAG1='-lm -lpthread' bonanza
 
 icc:
-	$(MAKE) CC=icc CFLAGS='-w2 $(OPT) -std=gnu99 -O2 -ipo' LDFLAG1='-static -ipo -pthread' bonanza
+	$(MAKE) CC=icc CFLAGS='-w2 $(OPT) -std=gnu99 -O2 -ipo -fcommon' LDFLAG1='-static -ipo -pthread' bonanza
 
 bonanza : $(OBJS)
 	$(CC) -o bonanza $(OBJS) $(LDFLAG1) $(LDFLAG2)

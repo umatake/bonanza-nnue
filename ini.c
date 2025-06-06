@@ -120,6 +120,9 @@ ini( tree_t * restrict ptree )
 
   /*if ( ini_fv() < 0 ) { return -1; }*/
   if ( load_fv() < 0 ) { return -1; }
+#ifdef USE_NNUE
+  nnue_auto_init();
+#endif
 
   for ( i = 0; i < 31; i++ ) { p_value[i]       = 0; }
   for ( i = 0; i < 31; i++ ) { p_value_ex[i]    = 0; }
