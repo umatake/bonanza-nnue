@@ -1,4 +1,4 @@
-OBJS =data.o main.o io.o proce.o utility.o ini.o attack.o book.o makemove.o \
+OBJS =data.o main.o io.o proce.o usi.o nnue_eval_stub.o utility.o ini.o attack.o book.o makemove.o \
       unmake.o time.o csa.o valid.o bitop.o iterate.o searchr.o search.o \
       quiesrch.o evaluate.o swap.o  hash.o root.o next.o movgenex.o \
       genevasn.o gencap.o gennocap.o gendrop.o mate1ply.o rand.o learn1.o \
@@ -17,7 +17,7 @@ OBJS =data.o main.o io.o proce.o utility.o ini.o attack.o book.o makemove.o \
 # -DMNJ_LAN         enables a client-mode of cluster computing.
 # -DNO_LOGGING      suppresses dumping log files.
 
-OPT =-DNDEBUG -DMINIMUM -DTLP -DCSA_LAN -DMNJ_LAN -DXBOARD -DMPV
+OPT =-DNDEBUG -DMINIMUM -DTLP -DCSA_LAN -DMNJ_LAN -DXBOARD -DMPV -DUSI -DUSE_NNUE
 
 help:
 	@echo "try targets as:"

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <assert.h>
 #include "shogi.h"
+#include "nnue_eval_stub.h"
 
 static int ehash_probe( uint64_t current_key, unsigned int hand_b,
 			int *pscore );
@@ -73,6 +74,10 @@ eval_material( const tree_t * restrict ptree )
 int
 evaluate( tree_t * restrict ptree, int ply, int turn )
 {
+#ifdef USE_NNUE
+  ptree->neval_called++;
+  return nnue_evaluate(ptree);
+#else
   int list0[52], list1[52];
   int nlist, score, sq_bk, sq_wk, k0, k1, l0, l1, i, j, sum;
 
@@ -134,6 +139,7 @@ evaluate( tree_t * restrict ptree, int ply, int turn )
   ptree->stand_pat[ply] = (short)score;
 
   return score;
+#endif
 
 }
 
